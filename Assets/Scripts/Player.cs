@@ -190,7 +190,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _controller.collisions.below)
         {
-            AudioManager.Instance.Play("jump");
+            AudioManager.Instance.Play("jump2");
             _velocity.y = _maxJumpVelocity;
             _hasJumped = true;
         }
