@@ -1,5 +1,13 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
+
+public enum GravityPowerupState
+{
+    NO_GRAVITYPOWERUP,
+    HAS_GRAVITYPOWERUP,
+    REVERSED_GRAVITY,
+}
 
 [RequireComponent(typeof(BoxController2D))]
 public class Player : MonoBehaviour
@@ -22,7 +30,6 @@ public class Player : MonoBehaviour
     private float _maxJumpHeight = 4.5f;
     
     public float timeToJumpApex = .4f;
-
     public float moveSpeed = 10;
 
     public float accelerationTimeAirborne = .2f;
@@ -38,7 +45,10 @@ public class Player : MonoBehaviour
 
     private bool _hasJumped;
     public bool _hasMovedThisFrame;
+    private bool _outOfBounds;
 
+    public GravityPowerupState _gravityPowerupState = GravityPowerupState.NO_GRAVITYPOWERUP;
+    
     // Use this for initialization
     void Start ()
     {
@@ -62,11 +72,82 @@ public class Player : MonoBehaviour
     void Update () {
         if (Time.timeScale > .01f)
         {
+            CheckScreenBoundaries();
+            LimitMaxSpeed();
             UpdateDirection();
             UpdateMovement();
+            CheckGravityPowerup();
         }
     }
 
+    private void CheckScreenBoundaries()
+    {
+        var dist = (transform.position - Camera.main.transform.position).z;
+        
+        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
+        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
+
+        if (!_outOfBounds &&
+            (transform.position.y > topBorder || 
+            transform.position.y < bottomBorder ||
+            transform.position.x > rightBorder ||
+            transform.position.x < leftBorder))
+        {
+            StartCoroutine(WaitAfterDeath(0.8f));
+        }
+    }
+    
+    private IEnumerator WaitAfterDeath(float seconds)
+    {
+        _outOfBounds = true;
+        yield return new WaitForSeconds(seconds);
+        transform.position = new Vector3(-13, -2, transform.position.z);
+        _outOfBounds = false;
+
+    }
+    private void LimitMaxSpeed()
+    {           
+        _velocity.y = Mathf.Clamp(_velocity.y,-35f, 35f);
+    }
+
+    private void CheckGravityPowerup()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            switch (_gravityPowerupState)
+            {
+                case GravityPowerupState.NO_GRAVITYPOWERUP:
+                    return;
+                case GravityPowerupState.HAS_GRAVITYPOWERUP:
+                    StartCoroutine(SmoothChangeGravity(Physics2D.gravity, -Physics2D.gravity, .1f));
+                    _gravityPowerupState = GravityPowerupState.REVERSED_GRAVITY;
+                    break;
+                case GravityPowerupState.REVERSED_GRAVITY:
+                    
+                    StartCoroutine(SmoothChangeGravity(Physics2D.gravity/2, -Physics2D.gravity, .1f));
+                    _gravityPowerupState = GravityPowerupState.NO_GRAVITYPOWERUP;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+
+    private IEnumerator SmoothChangeGravity(Vector2 start, Vector2 end, float time)
+    {
+        var timer = 0f;
+        
+        while((timer += Time.deltaTime) < time)
+        {
+            Physics2D.gravity = Vector2.Lerp(start, end, timer);
+            yield return null;
+        }
+
+        Physics2D.gravity = end;
+
+    }
     private void UpdateDirection()
     {
         if (Math.Abs(_velocity.x) < float.Epsilon)
@@ -75,8 +156,10 @@ public class Player : MonoBehaviour
         }
 
         var flipX = _velocity.x > float.Epsilon;
+        var flipY = Physics2D.gravity.x > float.Epsilon;
 
         GetComponent<SpriteRenderer>().flipX = flipX;
+        GetComponent<SpriteRenderer>().flipY = flipY;
     }
 
     private void UpdateMovement()
