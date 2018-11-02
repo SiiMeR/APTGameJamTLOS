@@ -16,9 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _accelerationTimeGrounded = .1f;
     
     [SerializeField] private GameObject _deathScreen;
-    [SerializeField] private float _maxBoostTime = 2.0f;
     [SerializeField] private int _currency = 100;
-    [SerializeField] private int _maxHealth = 100;
     [SerializeField] private float _maxJumpHeight = 4f;
     [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private float _secondsInvincibility = 1.5f;
@@ -29,7 +27,6 @@ public class Player : MonoBehaviour
     private BoxController2D _controller;
     private float _currentBoostTime;
     private Animator _animator;
-    private int _currentHealth;
     private bool _isBoosting;
     private Vector2 _lastFacingDirection;
     private Vector3 _lastInput;
@@ -44,27 +41,7 @@ public class Player : MonoBehaviour
         set => _currency = value;
     }
 
-    public int CurrentHealth
-    {
-        get => _currentHealth;
-        set
-        {
-            if (value < 1) // dead
-            {
-                StartCoroutine(Death());
-            }
-            else
-            {
-                _currentHealth = value;
-            }
-        }
-    }
 
-    public int MaxHealth
-    {
-        get => _maxHealth;
-        set => _maxHealth = value;
-    }
 
     private IEnumerator Death()
     {
@@ -90,9 +67,6 @@ public class Player : MonoBehaviour
         _lastFacingDirection = Vector2.right;
 
    //     _deathScreen.SetActive(false);
-
-        _currentHealth = _maxHealth;
-
         _animator = GetComponent<Animator>();
 
         _controller = GetComponent<BoxController2D>();
@@ -119,18 +93,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void DamagePlayer(int damageToTake)
-    {
-        if (!_animator.GetBool("Damaged"))
-        {
-
-            StartCoroutine(PlayerDamaged());
-
-
-            CurrentHealth -= damageToTake;
-            Debug.Log($"Took a hit, {_currentHealth} health left. ");
-        }
-    }
 
 
     public IEnumerator PlayerDamaged()

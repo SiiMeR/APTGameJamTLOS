@@ -165,7 +165,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202586612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.01, z: -10}
+  m_LocalPosition: {x: 0, y: -1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 64
+  m_AssetsPPU: 60
   m_RefResolutionX: 1920
   m_RefResolutionY: 1080
   m_UpscaleRT: 0
@@ -1550,7 +1550,6 @@ GameObject:
   - component: {fileID: 766099852}
   - component: {fileID: 766099851}
   - component: {fileID: 766099850}
-  - component: {fileID: 766099855}
   - component: {fileID: 766099856}
   m_Layer: 0
   m_Name: PlayerChar
@@ -1680,26 +1679,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766099849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.06, y: -2.88, z: 0}
+  m_LocalPosition: {x: -14.06, y: -2.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &766099855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766099849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230cf6d655324f94b9634e909d97d3db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _jumpforce: 10
-  _movespeed: 10
 --- !u!114 &766099856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,11 +1702,9 @@ MonoBehaviour:
   _accelerationTimeAirborne: 0.2
   _accelerationTimeGrounded: 0.1
   _deathScreen: {fileID: 0}
-  _maxBoostTime: 2
   _currency: 100
-  _maxHealth: 100
-  _maxJumpHeight: 4
-  _moveSpeed: 10
+  _maxJumpHeight: 9
+  _moveSpeed: 15
   _secondsInvincibility: 1.5
   _minJumpHeight: 1
   _timeToJumpApex: 0.4

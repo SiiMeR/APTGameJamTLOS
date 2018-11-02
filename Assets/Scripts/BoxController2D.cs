@@ -2,7 +2,8 @@
 
 public class BoxController2D : RayCastController
 {
-    protected const float DISTANCEBETWEENRAYS = .25f;
+    private float DISTANCEBETWEENRAYS_X = 0.1f;
+    private float DISTANCEBETWEENRAYS_Y = 0.1f;
 
     private float _horizontalRaySpacing;
     private float _verticalRaySpacing;
@@ -111,8 +112,8 @@ public class BoxController2D : RayCastController
         var boundsWidth = bounds.size.x;
         var boundsHeight = bounds.size.y;
 
-        horizontalRayCount = Mathf.RoundToInt(boundsHeight / DISTANCEBETWEENRAYS);
-        verticalRayCount = Mathf.RoundToInt(boundsWidth / DISTANCEBETWEENRAYS);
+        horizontalRayCount = Mathf.RoundToInt(boundsHeight / DISTANCEBETWEENRAYS_X);
+        verticalRayCount = Mathf.RoundToInt(boundsWidth / DISTANCEBETWEENRAYS_Y);
 
         _horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         _verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
