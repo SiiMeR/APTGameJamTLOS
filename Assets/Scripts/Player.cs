@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var flipX = _velocity.x < -float.Epsilon;
+        var flipX = _velocity.x > float.Epsilon;
 
         GetComponent<SpriteRenderer>().flipX = flipX;
     }
