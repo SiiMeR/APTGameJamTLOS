@@ -4,9 +4,8 @@ using UnityEngine;
 // Sets the correct fields for pixel art style sprites so it doesn't get filtered in any way
 public class TexturePreprocessor : AssetPostprocessor
 {
+    private const int PIXELSPERUNIT = 32;
 
-    private static int PIXELSPERUNIT = 64;
-    
     private void OnPreprocessTexture()
     {    
         var textureImporter = (TextureImporter) assetImporter;

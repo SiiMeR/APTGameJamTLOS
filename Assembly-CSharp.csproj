@@ -54,7 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\BoxController2D.cs" />
+    <Compile Include="Assets\Scripts\CircleController2D.cs" />
+    <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\RayCastController.cs" />
+    <Compile Include="Assets\Scripts\Singleton.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/APTGameJamTLOS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -69,6 +75,12 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/APTGameJamTLOS/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>D:/APTGameJamTLOS/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>D:/APTGameJamTLOS/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
