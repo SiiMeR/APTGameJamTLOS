@@ -149,7 +149,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.6792453, g: 0.6322456, b: 0.51584196, a: 0}
+  m_BackGroundColor: {r: 0.631675, g: 0.65084237, b: 0.8018868, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202586612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1489,7 +1489,7 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1549,8 +1549,8 @@ GameObject:
   - component: {fileID: 766099853}
   - component: {fileID: 766099852}
   - component: {fileID: 766099851}
-  - component: {fileID: 766099850}
   - component: {fileID: 766099856}
+  - component: {fileID: 766099850}
   m_Layer: 0
   m_Name: PlayerChar
   m_TagString: Untagged
@@ -1607,21 +1607,21 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1, y: 1.6}
     newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1.5999999}
   m_EdgeRadius: 0
 --- !u!212 &766099853
 SpriteRenderer:
@@ -1662,7 +1662,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 69e463b0cab3afc43a6f2f48352b2941, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.5, y: 1}
@@ -1679,7 +1679,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766099849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.06, y: -2.83, z: 0}
+  m_LocalPosition: {x: -13.122, y: -2.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1697,14 +1697,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e45dbe1a1ab2e846a3b30c3d000ffb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
-  IgnoreGround: 0
-  _accelerationTimeAirborne: 0.2
-  _accelerationTimeGrounded: 0.1
-  _deathScreen: {fileID: 0}
-  _currency: 100
-  _maxJumpHeight: 9
-  _moveSpeed: 15
-  _secondsInvincibility: 1.5
-  _minJumpHeight: 1
-  _timeToJumpApex: 0.4
+  minJumpHeight: 1
+  timeToJumpApex: 0.3
+  moveSpeed: 10
+  accelerationTimeAirborne: 0.2
+  accelerationTimeGrounded: 0.1
+  _velocity: {x: 0, y: 0, z: 0}
