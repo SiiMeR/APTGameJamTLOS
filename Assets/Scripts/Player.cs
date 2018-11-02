@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GravityPowerupState
 {
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        AudioManager.Instance.Play("green");
+        
         _controller = GetComponent<BoxController2D>();
         
         CalculateGravity();
@@ -101,10 +104,14 @@ public class Player : MonoBehaviour
     
     private IEnumerator WaitAfterDeath(float seconds)
     {
+        yield return new WaitForSeconds(0.05f);
+        Time.timeScale = 0f;
         _outOfBounds = true;
-        yield return new WaitForSeconds(seconds);
-        transform.position = new Vector3(-13, -2, transform.position.z);
+        yield return new WaitForSecondsRealtime(seconds);
         _outOfBounds = false;
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
     private void LimitMaxSpeed()
@@ -183,6 +190,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _controller.collisions.below)
         {
+            AudioManager.Instance.Play("jump");
             _velocity.y = _maxJumpVelocity;
             _hasJumped = true;
         }
