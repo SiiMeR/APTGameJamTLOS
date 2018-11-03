@@ -453,7 +453,7 @@ PrefabInstance:
     - target: {fileID: 3050814455742588103, guid: 240aeb95c82e8fe429d04b25aa4dc101,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3050814455742588103, guid: 240aeb95c82e8fe429d04b25aa4dc101,
         type: 3}
@@ -504,6 +504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050814455742588102, guid: 240aeb95c82e8fe429d04b25aa4dc101,
+        type: 3}
+      propertyPath: nextScene
+      value: Level2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 240aeb95c82e8fe429d04b25aa4dc101, type: 3}

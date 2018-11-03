@@ -61,9 +61,9 @@ public class Player : MonoBehaviour
 
     public RuntimeAnimatorController _moleManAnimator;
 
-    public Sprite redPortal;
+    public Tile redPortal;
 
-    public Sprite bluePortal;
+    public Tile bluePortal;
     // Use this for initialization
     void Start()
     {
@@ -131,21 +131,25 @@ public class Player : MonoBehaviour
                 
                 if (facingRight)
                 {
-                    rayOrigin = rayOrigin.AddX(hit.distance).AddX(1.5f).RoundX();
-                    rayOrigin2 = rayOrigin2.AddX(-hit2.distance).AddX(-1.5f).RoundX();
+                    rayOrigin = rayOrigin.AddX(hit.distance).AddX(1f).RoundX();
+                    rayOrigin2 = rayOrigin2.AddX(-hit2.distance).AddX(-0.5f).RoundX();
                 }
                 else
                 {
-                    rayOrigin = rayOrigin.AddX(-hit.distance).AddX(-1.5f).RoundX();
-                    rayOrigin2 = rayOrigin2.AddX(hit2.distance).AddX(1.5f).RoundX();
+                    rayOrigin = rayOrigin.AddX(-hit.distance).AddX(-1f).RoundX();
+                    rayOrigin2 = rayOrigin2.AddX(hit2.distance).AddX(0.5f).RoundX();
                 }
 
-                rayOrigin = rayOrigin.Round();
+                rayOrigin = rayOrigin.Round();    
                 rayOrigin2 = rayOrigin2.Round();
                 
                 Debug.Log($"{rayOrigin} + {rayOrigin2}");
-                _tileMap.SetTile(rayOrigin.Vector3Int(), null);
-                _tileMap.SetTile(rayOrigin2.Vector3Int(), null);
+
+                if (_tileMap.GetTile(rayOrigin.Vector3Int()) != null && _tileMap.GetTile(rayOrigin2.Vector3Int()) != null)
+                {
+                    _tileMap.SetTile(rayOrigin.Vector3Int(), redPortal);
+                    _tileMap.SetTile(rayOrigin2.Vector3Int(), bluePortal);
+                }
                 
             }
         }

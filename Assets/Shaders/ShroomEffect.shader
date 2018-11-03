@@ -38,7 +38,7 @@
                             
                 v.vertex.x += sin(_Time.y * 0.15 +  v.vertex.y * 0.8) * 0.05;
                 v.vertex.x *= v.vertex.x;
-             //    v.vertex.xy *= _SinTime.zz / _CosTime.zz * fmod(_Time.z, 0.1);
+//                v.vertex.xy *= _SinTime.zz / _CosTime.xx * fmod(_Time.z, 0.01);
                 v.vertex.y += sin(_Time.x * 0.14 +  v.vertex.x * 30) * 0.1;
 
                 v2f o;
@@ -57,7 +57,7 @@
              //   float2 center = float2(0.5,0.5);
                 float aspect = _ScreenParams.x / _ScreenParams.y;
                 float dist = distance(center, i.screenPos.xy);
-               // fixed4 col = (tex2D(_MainTex, i.uv) +i.screenPos.x) * i.screenPos *  fmod(  0.1, _CosTime.x) / dist;
+              //  fixed4 col = (tex2D(_MainTex, i.uv) +i.screenPos.x) * i.screenPos *  fmod(  0.1, _CosTime.x) / dist;
                 fixed4 col =  tex2D(_MainTex, i.uv) / 2;
                 
                 col +=  i.screenPos.x * (i.screenPos - float4(0.2,0.8,0.2,1))  / dist;

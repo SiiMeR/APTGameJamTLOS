@@ -174,9 +174,9 @@ MonoBehaviour:
     m_Bits: 256
   _gravityPowerupState: 0
   hasShroomEffect: 0
-  _moleManAnimator: {fileID: 0}
-  redPortal: {fileID: 21300000, guid: f1a38468704639844947909dce734ec7, type: 3}
-  bluePortal: {fileID: 21300000, guid: bb84570b09736d44a88c025498e27789, type: 3}
+  _moleManAnimator: {fileID: 9100000, guid: 7486eb9da088f2944a012bb6347aa44e, type: 2}
+  redPortal: {fileID: 11400000, guid: 14c6a4a1dc02a5a4885c870d2daa3b34, type: 2}
+  bluePortal: {fileID: 11400000, guid: b3071a3170274d1428cfb9e55dce2ecb, type: 2}
 --- !u!50 &2602568600870901467
 Rigidbody2D:
   serializedVersion: 4

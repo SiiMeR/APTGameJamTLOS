@@ -4702,7 +4702,7 @@ PrefabInstance:
     - target: {fileID: 3050814455742588103, guid: 240aeb95c82e8fe429d04b25aa4dc101,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3050814455742588103, guid: 240aeb95c82e8fe429d04b25aa4dc101,
         type: 3}
@@ -4753,11 +4753,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exit
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050814455742588102, guid: 240aeb95c82e8fe429d04b25aa4dc101,
-        type: 3}
-      propertyPath: nextScene
-      value: Level4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 240aeb95c82e8fe429d04b25aa4dc101, type: 3}
@@ -4914,7 +4909,7 @@ PrefabInstance:
     - target: {fileID: 1584385957216199122, guid: 3c5c9774719f83c458211560120d49b9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.93
+      value: -3.01
       objectReference: {fileID: 0}
     - target: {fileID: 1584385957216199122, guid: 3c5c9774719f83c458211560120d49b9,
         type: 3}
@@ -5034,6 +5029,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerChar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602568600870901466, guid: f3d3d1177bd4f2041a2ac9804e55b127,
+        type: 3}
+      propertyPath: doSpawnAnimation
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3d3d1177bd4f2041a2ac9804e55b127, type: 3}
