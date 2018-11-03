@@ -102,20 +102,19 @@ public class Player : MonoBehaviour
     {
         if (!hasMoleManUpgrade) return;
 
+        var rayOrigin = transform.position;
+        
         if (Mathf.Abs(_velocity.x) > float.Epsilon)
         {
             var facingRight = Mathf.Sign(_velocity.x) > float.Epsilon;
-            var rayOrigin = transform.position;
             
-            var (hit, hit2, hit3) = TryDigInDirection(Vector2.right * Mathf.Sign(_velocity.x), rayOrigin);
+            var (hit, hit2, hit3) = TryDigInDirectionHorizontal(Vector2.right * Mathf.Sign(_velocity.x), rayOrigin);
 
             var mainHit = hit ? hit : hit2 ? hit2 : hit3;
             if (mainHit)
             {
 
                 var centerPoint = rayOrigin;
-
-                var absDist = Mathf.CeilToInt(Mathf.Abs(mainHit.distance));
 
                 if (facingRight)
                 {
@@ -125,9 +124,6 @@ public class Player : MonoBehaviour
                 {
                     centerPoint = centerPoint.AddX(-mainHit.distance).AddX(-0.5f).RoundX();
                 }
-//                centerPoint = facingRight ? centerPoint.AddX(absDist + .25f) : centerPoint.AddX(-absDist -.6f);
-                
-                Debug.Log($"{absDist}  - {centerPoint} + {centerPoint.Vector3Int()} + {mainHit.distance}");
 
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
@@ -135,24 +131,46 @@ public class Player : MonoBehaviour
             }
  
 
-            Debug.DrawRay(rayOrigin, Vector2.right * Mathf.Sign(_lastFacingDirection.x), Color.red, 1.0f);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
+            var (hit, hit2, hit3) = TryDigInDirectionVertical(Vector2.down, rayOrigin);
+
+            var mainHit = hit ? hit : hit2 ? hit2 : hit3;
+            
+            if (mainHit)
+            {
+                var centerPoint = rayOrigin;
+
+                centerPoint = centerPoint.AddY(-mainHit.distance).AddY(-0.5f).RoundY();
+   
+
+                _tileMap.SetTile(centerPoint.Vector3Int(), null);
+                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.left, null);
+                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.right, null);
+            }
         }
     }
 
 
-    private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirection(Vector2 direction, Vector3 origin)
+    private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirectionHorizontal(Vector2 direction, Vector3 origin)
     {
         var distance = 1.0f;
         var hit = Physics2D.Raycast(origin + Vector3.up, direction, distance, moleManLayers);
         var hit2 = Physics2D.Raycast(origin, direction,distance, moleManLayers);
         var hit3 = Physics2D.Raycast(origin + Vector3.down, direction, distance, moleManLayers);
 
-        Debug.DrawRay(origin + Vector3.up, direction, Color.blue ,distance);
-        Debug.DrawRay(origin + Vector3.down, direction, Color.blue ,distance);
+        return (hit,hit2, hit3);
+    }
+    
+    private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirectionVertical(Vector2 direction, Vector3 origin)
+    {
+        var distance = 1.5f;
+        var hit = Physics2D.Raycast(origin + Vector3.left, direction, distance, moleManLayers);
+        var hit2 = Physics2D.Raycast(origin, direction,distance, moleManLayers);
+        var hit3 = Physics2D.Raycast(origin + Vector3.right, direction, distance, moleManLayers);
+
         return (hit,hit2, hit3);
     }
 
@@ -263,7 +281,7 @@ public class Player : MonoBehaviour
 
         Debug.DrawRay(transform.position, input, Color.red);
 
-        if (Input.GetButtonDown("Jump") && _controller.collisions.below)
+        if (Input.GetButtonDown("Jump") && _controller.collisions.below && !hasMoleManUpgrade)
         {
             AudioManager.Instance.Play("jump2");
             _velocity.y = _maxJumpVelocity;
