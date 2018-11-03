@@ -18,5 +18,10 @@ public static class Vector3Extensions
     {
         return new Vector3(vector3.x + toAdd, vector3.y, vector3.z);
     }
+
+    public static Vector3 RoundX(this Vector3 vector3)
+    {
+        return new Vector3(Mathf.Round(vector3.x), vector3.y, vector3.z);
+    }
     
 }

@@ -119,15 +119,15 @@ public class Player : MonoBehaviour
 
                 if (facingRight)
                 {
-                    centerPoint += Vector3.right * 1.5f;
+                    centerPoint = centerPoint.AddX(mainHit.distance).AddX(0.5f).RoundX();
                 }
                 else
                 {
-                    centerPoint += Vector3.left * 2;
+                    centerPoint = centerPoint.AddX(-mainHit.distance).AddX(-0.5f).RoundX();
                 }
 //                centerPoint = facingRight ? centerPoint.AddX(absDist + .25f) : centerPoint.AddX(-absDist -.6f);
                 
-                Debug.Log($"{centerPoint} + {centerPoint.Vector3Int()} + {mainHit.distance}");
+                Debug.Log($"{absDist}  - {centerPoint} + {centerPoint.Vector3Int()} + {mainHit.distance}");
 
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
