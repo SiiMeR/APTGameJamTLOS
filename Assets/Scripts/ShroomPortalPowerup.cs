@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShroomPortalPowerup : MonoBehaviour
 {
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class ShroomPortalPowerup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print(other.gameObject.name);
+        ShroomEffect.ToggleShroomEffect();
+        Destroy(gameObject);
     }
 }
