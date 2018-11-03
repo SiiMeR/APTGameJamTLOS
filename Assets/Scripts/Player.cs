@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public enum GravityPowerupState
 {
@@ -38,7 +39,8 @@ public class Player : MonoBehaviour
     public float accelerationTimeGrounded = .1f;
 
     public Vector3 _velocity;
-	
+
+    private Vector2 _lastFacingDirection;
     private float _maxJumpVelocity;
     private float _minJumpVelocity;
     private float _velocityXSmoothing;
@@ -49,15 +51,19 @@ public class Player : MonoBehaviour
     public bool hasMovedThisFrame;
     private bool _outOfBounds;
     public bool hasMoleManUpgrade;
-   
+    public bool doSpawnAnimation;
+    public LayerMask moleManLayers;
 
     public GravityPowerupState _gravityPowerupState = GravityPowerupState.NO_GRAVITYPOWERUP;
     
     // Use this for initialization
     void Start ()
     {
-        StartCoroutine(Game.Instance.SpawnPlayer(2.0f)); 
-        
+        if (doSpawnAnimation)
+        {
+            StartCoroutine(Game.Instance.SpawnPlayer(2.0f));
+        }
+
         AudioManager.Instance.Play("green", isLooping:true);
         
         _controller = GetComponent<BoxController2D>();
@@ -78,7 +84,9 @@ public class Player : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
+
         if (Time.timeScale > .01f)
         {
             CheckScreenBoundaries();
@@ -92,10 +100,31 @@ public class Player : MonoBehaviour
 
     private void CheckMoleManPowerup()
     {
-        if (hasMoleManUpgrade && Input.GetButtonDown("Jump"))
+        if (!hasMoleManUpgrade) return;
+
+        if (Mathf.Abs(_velocity.x )> float.Epsilon)
         {
-            
+
+            var rayOrigin = transform.position;
+            var hit = Physics2D.Raycast(rayOrigin, Vector2.right * Mathf.Sign(_lastFacingDirection.x), 2.0f, moleManLayers);
+
+            Debug.Log($"{hit}");
+            if (hit)
+            {
+                FindObjectOfType<Tilemap>().SetTile(hit.point.ToVector3Int(),null);
+//                Destroy(tile);
+				
+            }
+			
+            Debug.DrawRay(rayOrigin, Vector2.right * Mathf.Sign(_lastFacingDirection.x),Color.red, 2.0f);
         }
+        
+        if (Input.GetButtonDown("Jump"))
+        {
+                
+        }
+        
+        
     }
 
     private void CheckScreenBoundaries()
@@ -172,6 +201,7 @@ public class Player : MonoBehaviour
     }
     private void UpdateDirection()
     {
+        
         if (Math.Abs(_velocity.x) < float.Epsilon)
         {
             return;
@@ -183,6 +213,8 @@ public class Player : MonoBehaviour
         GetComponent<SpriteRenderer>().flipX = flipX;
         GetComponent<SpriteRenderer>().flipY = flipY;
     }
+
+
 
     private void UpdateMovement()
     {
@@ -199,6 +231,7 @@ public class Player : MonoBehaviour
         if (input != Vector2.zero)
         {
             hasMovedThisFrame = true;
+            _lastFacingDirection = input;
         }
         
         Debug.DrawRay(transform.position, input, Color.red);

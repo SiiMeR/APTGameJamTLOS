@@ -20,6 +20,7 @@ public class NoHandsMolePowerup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            other.gameObject.GetComponent<Player>().hasMoleManUpgrade = true;
             Destroy(gameObject);
         }
     }
