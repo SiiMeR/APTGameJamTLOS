@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
     private Tilemap _tileMap;
 
+    private Animator _animator;
+
     // Use this for initialization
     void Start()
     {
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Game.Instance.SpawnPlayer(2.0f));
         }
+
+        _animator = GetComponent<Animator>();
 
         AudioManager.Instance.Play("green", isLooping: true);
 
@@ -160,7 +164,7 @@ public class Player : MonoBehaviour
 
     private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirectionHorizontal(Vector2 direction, Vector3 origin)
     {
-        var distance = 1.0f;
+        var distance = 1.5f;
         var hit = Physics2D.Raycast(origin + Vector3.up, direction, distance, moleManLayers);
         var hit2 = Physics2D.Raycast(origin, direction,distance, moleManLayers);
         var hit3 = Physics2D.Raycast(origin + Vector3.down, direction, distance, moleManLayers);
@@ -308,5 +312,19 @@ public class Player : MonoBehaviour
         _velocity.y += Physics2D.gravity.x * Time.deltaTime;
 
         _controller.Move(_velocity * Time.deltaTime);
+        
+        
+    }
+
+    private void LateUpdate()
+    {
+        if (hasMovedThisFrame)
+        {
+            _animator.SetTrigger("Walk");
+        }
+        else
+        {
+            _animator.SetTrigger("Stop");
+        }
     }
 }
