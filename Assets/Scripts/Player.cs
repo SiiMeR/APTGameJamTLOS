@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
 
                 _animator.SetTrigger("Dig");
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
-                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
+               // _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
             }
  
@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
     
     private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirectionVertical(Vector2 direction, Vector3 origin)
     {
-        var distance = 1.5f;
+        var distance = 1.1f;
         var hit = Physics2D.Raycast(origin + Vector3.left, direction, distance, moleManLayers);
         var hit2 = Physics2D.Raycast(origin, direction,distance, moleManLayers);
         var hit3 = Physics2D.Raycast(origin + Vector3.right, direction, distance, moleManLayers);

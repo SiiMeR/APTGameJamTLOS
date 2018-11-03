@@ -22064,11 +22064,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerupMoleman
       objectReference: {fileID: 0}
-    - target: {fileID: 3028670954056457306, guid: adaf9d34fd833564b8be235ca1ba9397,
-        type: 3}
-      propertyPath: moleSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 15d0cb7dce5401b4b865eb57052a335b,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adaf9d34fd833564b8be235ca1ba9397, type: 3}
