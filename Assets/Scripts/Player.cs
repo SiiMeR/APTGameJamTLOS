@@ -61,6 +61,9 @@ public class Player : MonoBehaviour
 
     public RuntimeAnimatorController _moleManAnimator;
 
+    public Sprite redPortal;
+
+    public Sprite bluePortal;
     // Use this for initialization
     void Start()
     {
@@ -106,10 +109,55 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void DrawShroomPortalHelpers()
+    {
+        var rayOrigin = transform.position;
+        var rayOrigin2 = rayOrigin;
+
+        var direction = Mathf.Sign(_velocity.x) * Vector3.right;
+
+        var hit = Physics2D.Raycast(rayOrigin, direction, 4f, moleManLayers);
+
+        if (hit)
+        {
+            var hit2 = Physics2D.Raycast(rayOrigin, -direction, 20f, moleManLayers);
+
+            if (hit2)
+            {
+                Debug.DrawRay(rayOrigin, direction, Color.yellow);
+                Debug.DrawRay(rayOrigin, -direction, Color.cyan);
+                
+                var facingRight = Mathf.Sign(_velocity.x) > float.Epsilon;
+                
+                if (facingRight)
+                {
+                    rayOrigin = rayOrigin.AddX(hit.distance).AddX(1.5f).RoundX();
+                    rayOrigin2 = rayOrigin2.AddX(-hit2.distance).AddX(-1.5f).RoundX();
+                }
+                else
+                {
+                    rayOrigin = rayOrigin.AddX(-hit.distance).AddX(-1.5f).RoundX();
+                    rayOrigin2 = rayOrigin2.AddX(hit2.distance).AddX(1.5f).RoundX();
+                }
+
+                rayOrigin = rayOrigin.Round();
+                rayOrigin2 = rayOrigin2.Round();
+                
+                Debug.Log($"{rayOrigin} + {rayOrigin2}");
+                _tileMap.SetTile(rayOrigin.Vector3Int(), null);
+                _tileMap.SetTile(rayOrigin2.Vector3Int(), null);
+                
+            }
+        }
+    }
+
     private void CheckShroomPortalPowerup()
     {
+        
         if (!hasShroomEffect) return;
 
+        DrawShroomPortalHelpers();
+        
         var rayOrigin = transform.position;
 
         if (Mathf.Abs(_velocity.x) > float.Epsilon)
@@ -177,7 +225,7 @@ public class Player : MonoBehaviour
 
                 _animator.SetTrigger("Dig");
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
-               // _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
+                // _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
             }
  

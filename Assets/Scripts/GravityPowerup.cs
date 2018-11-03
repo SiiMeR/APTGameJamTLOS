@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class GravityPowerup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public float animationAmplitude = 1f;
+    public float animationPeriod = 1f;
 
+
+    private Vector3 startPos;
+	
+    // Use this for initialization
+    void Start () {
+        startPos = transform.position;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-
+        var theta = Time.timeSinceLevelLoad / animationPeriod;
+        var distance = animationAmplitude * Mathf.Sin(theta);
+        transform.position = startPos + Vector3.up * distance;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

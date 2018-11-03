@@ -144,7 +144,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
-  collider: {fileID: 0}
+  _coll: {fileID: 0}
   horizontalRayCount: 4
   verticalRayCount: 4
 --- !u!114 &2602568600870901466
@@ -165,14 +165,18 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.2
   accelerationTimeGrounded: 0.1
   _velocity: {x: 0, y: 0, z: 0}
+  _controller: {fileID: 0}
   hasMovedThisFrame: 0
   hasMoleManUpgrade: 0
-  doSpawnAnimation: 0
+  doSpawnAnimation: 1
   moleManLayers:
     serializedVersion: 2
     m_Bits: 256
   _gravityPowerupState: 0
   hasShroomEffect: 0
+  _moleManAnimator: {fileID: 0}
+  redPortal: {fileID: 21300000, guid: f1a38468704639844947909dce734ec7, type: 3}
+  bluePortal: {fileID: 21300000, guid: bb84570b09736d44a88c025498e27789, type: 3}
 --- !u!50 &2602568600870901467
 Rigidbody2D:
   serializedVersion: 4
