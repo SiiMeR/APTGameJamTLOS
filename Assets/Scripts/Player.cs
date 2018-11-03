@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     private Tilemap _tileMap;
 
     private Animator _animator;
+    public bool hasShroomEffect;
 
     // Use this for initialization
     void Start()
@@ -99,6 +100,33 @@ public class Player : MonoBehaviour
             UpdateMovement();
             CheckGravityPowerup();
             CheckMoleManPowerup();
+            CheckShroomPortalPowerup();
+        }
+    }
+
+    private void CheckShroomPortalPowerup()
+    {
+        if (!hasShroomEffect) return;
+
+        var rayOrigin = transform.position;
+
+        if (Mathf.Abs(_velocity.x) > float.Epsilon)
+        {
+            var direction = Mathf.Sign(_velocity.x) * Vector3.right;
+            
+            var hit = Physics2D.Raycast(rayOrigin, direction, 1.5f, moleManLayers);
+
+            if (hit)
+            {
+                var hit2 = Physics2D.Raycast(rayOrigin, -direction, 20f, moleManLayers);
+
+                if (hit2)
+                {
+                    transform.position = hit2.point;
+                    Debug.DrawRay(rayOrigin, -direction, Color.blue, 1.0f);
+                }
+                Debug.DrawRay(rayOrigin, direction, Color.magenta, 1.0f);
+            }
         }
     }
 

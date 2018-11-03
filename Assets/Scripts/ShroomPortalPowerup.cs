@@ -21,6 +21,7 @@ public class ShroomPortalPowerup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         ShroomEffect.ToggleShroomEffect();
+        FindObjectOfType<Player>().hasShroomEffect = true;
         Destroy(gameObject);
     }
 }
