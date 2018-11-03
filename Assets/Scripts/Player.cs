@@ -125,6 +125,10 @@ public class Player : MonoBehaviour
                     centerPoint = centerPoint.AddX(-mainHit.distance).AddX(-0.5f).RoundX();
                 }
 
+                centerPoint = centerPoint.Round();
+                
+                Debug.Log($"{centerPoint} + {centerPoint.Vector3Int()}");
+
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
