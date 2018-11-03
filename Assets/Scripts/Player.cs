@@ -47,19 +47,23 @@ public class Player : MonoBehaviour
     private bool _hasJumped;
     public bool _hasMovedThisFrame;
     private bool _outOfBounds;
+   
 
     public GravityPowerupState _gravityPowerupState = GravityPowerupState.NO_GRAVITYPOWERUP;
     
     // Use this for initialization
     void Start ()
     {
-        AudioManager.Instance.Play("green");
+        StartCoroutine(Game.Instance.SpawnPlayer(3.0f)); 
+        
+        AudioManager.Instance.Play("green", isLooping:true);
         
         _controller = GetComponent<BoxController2D>();
         
         CalculateGravity();
 
     }
+
 
     void CalculateGravity()
     {
