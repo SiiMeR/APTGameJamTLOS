@@ -3035,10 +3035,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerChar
       objectReference: {fileID: 0}
-    - target: {fileID: 2602568600870901466, guid: f3d3d1177bd4f2041a2ac9804e55b127,
-        type: 3}
-      propertyPath: doSpawnAnimation
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3d3d1177bd4f2041a2ac9804e55b127, type: 3}

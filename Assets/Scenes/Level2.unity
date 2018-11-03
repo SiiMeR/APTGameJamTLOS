@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2602568600870901466, guid: f3d3d1177bd4f2041a2ac9804e55b127,
+        type: 3}
+      propertyPath: _moleManAnimator
+      value: 
+      objectReference: {fileID: 9100000, guid: 7486eb9da088f2944a012bb6347aa44e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3d3d1177bd4f2041a2ac9804e55b127, type: 3}
 --- !u!1001 &1091616876
@@ -326,6 +331,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773089263, guid: 69611dbe19e0889468f564424f5d551f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69611dbe19e0889468f564424f5d551f, type: 3}
@@ -22055,5 +22064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerupMoleman
       objectReference: {fileID: 0}
+    - target: {fileID: 3028670954056457306, guid: adaf9d34fd833564b8be235ca1ba9397,
+        type: 3}
+      propertyPath: moleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 15d0cb7dce5401b4b865eb57052a335b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adaf9d34fd833564b8be235ca1ba9397, type: 3}

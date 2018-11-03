@@ -7,12 +7,12 @@ public abstract class RayCastController : MonoBehaviour {
     public const float SKINWIDTH = .015f;
 
     public LayerMask collisionMask;
-    [HideInInspector] public Collider2D collider;
+    [HideInInspector] public Collider2D _coll;
 	
     // Use this for initialization
     public virtual void Awake ()
     {
-        collider = GetComponent<Collider2D>();
+        _coll = GetComponent<Collider2D>();
     }
 
 	
