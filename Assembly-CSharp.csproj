@@ -64,7 +64,9 @@
     <Compile Include="Assets\Scripts\NoHandsMolePowerup.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RayCastController.cs" />
+    <Compile Include="Assets\Scripts\ShroomPortalPowerup.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
+    <None Include="Assets\Shaders\ShroomEffect.shader" />
     <Reference Include="Unity.2D.PixelPerfect.Editor">
       <HintPath>D:/APTGameJamTLOS/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
