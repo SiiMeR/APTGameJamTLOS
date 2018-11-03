@@ -10,13 +10,13 @@ public class Game : Singleton<Game>
     public IEnumerator SpawnPlayer(float seconds)
     {
         var entranceLocation = GameObject.FindGameObjectWithTag("Entrance");
-
+        
         if (entranceLocation)
         {
             Debug.LogWarning("No entrance in scene");
         }
         var player = FindObjectOfType<Player>();
-        player.transform.position = entranceLocation.transform.position;
+        player.transform.position = entranceLocation.transform.position + Vector3.up * 2;;
 
         player.enabled = false;
 
@@ -27,7 +27,7 @@ public class Game : Singleton<Game>
         while ((timer += Time.deltaTime) < seconds)
         {
             
-            player.transform.position = Vector2.Lerp(entranceLocation.transform.position, endPosition, timer / seconds);
+            player.transform.position = Vector2.Lerp(entranceLocation.transform.position + Vector3.up * 2, endPosition, timer / seconds);
             yield return null;
         }
 

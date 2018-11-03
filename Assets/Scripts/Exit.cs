@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class Exit : MonoBehaviour
 {
     public string nextScene;
+
+    public Sprite offSprite;
+    public Sprite onSprite;
+    
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -320,6 +320,7 @@ public class Player : MonoBehaviour
         {
             _velocity.y = 0;
             _hasJumped = false;
+            _animator.SetTrigger("Stop");
         }
 
         var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -330,11 +331,11 @@ public class Player : MonoBehaviour
             _lastFacingDirection = input;
         }
 
-        Debug.DrawRay(transform.position, input, Color.red);
 
         if (Input.GetButtonDown("Jump") && _controller.collisions.below && !hasMoleManUpgrade)
         {
             AudioManager.Instance.Play("jump2");
+            _animator.SetTrigger("Jump");
             _velocity.y = _maxJumpVelocity;
             _hasJumped = true;
         }
