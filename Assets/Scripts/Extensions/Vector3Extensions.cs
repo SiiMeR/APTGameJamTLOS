@@ -13,7 +13,7 @@ public static class Vector3Extensions
     {
         return new Vector3Int((int) vector3.x, (int) vector3.y, (int) vector3.z);
     }
-    
+
     public static Vector3 AddX(this Vector3 vector3, float toAdd)
     {
         return new Vector3(vector3.x + toAdd, vector3.y, vector3.z);

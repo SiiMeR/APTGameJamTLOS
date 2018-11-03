@@ -13,4 +13,9 @@ public static class Vector2Extensions
     {
         return new Vector2(vector2.x + toAdd, vector2.y + toAdd);
     }
+
+    public static Vector3 Vector3(this Vector2 vector2)
+    {
+        return new Vector3(vector2.x, vector2.y);
+    }
 }

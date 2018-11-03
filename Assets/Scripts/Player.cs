@@ -122,14 +122,26 @@ public class Player : MonoBehaviour
 
                 if (hit2)
                 {
-                    transform.position = hit2.point;
-                    Debug.DrawRay(rayOrigin, -direction, Color.blue, 1.0f);
+                    transform.position = hit2.point.Vector3() + direction;
+                    StartCoroutine(ShroomCooldown(0.5f));
                 }
-                Debug.DrawRay(rayOrigin, direction, Color.magenta, 1.0f);
             }
         }
     }
 
+    private IEnumerator ShroomCooldown(float seconds)
+    {
+        hasShroomEffect = false;
+
+        var timer = 0f;
+
+        while ((timer += Time.deltaTime) < seconds)
+        {
+            yield return null;
+        }
+
+        hasShroomEffect = true;
+    }
     private void CheckMoleManPowerup()
     {
         if (!hasMoleManUpgrade) return;

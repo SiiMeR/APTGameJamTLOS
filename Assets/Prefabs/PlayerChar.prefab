@@ -167,11 +167,12 @@ MonoBehaviour:
   _velocity: {x: 0, y: 0, z: 0}
   hasMovedThisFrame: 0
   hasMoleManUpgrade: 0
-  doSpawnAnimation: 1
+  doSpawnAnimation: 0
   moleManLayers:
     serializedVersion: 2
     m_Bits: 256
   _gravityPowerupState: 0
+  hasShroomEffect: 0
 --- !u!50 &2602568600870901467
 Rigidbody2D:
   serializedVersion: 4
