@@ -10,6 +10,7 @@ public enum GravityPowerupState
     REVERSED_GRAVITY,
 }
 
+
 [RequireComponent(typeof(BoxController2D))]
 public class Player : MonoBehaviour
 {
@@ -45,8 +46,9 @@ public class Player : MonoBehaviour
     private BoxController2D _controller;
 
     private bool _hasJumped;
-    public bool _hasMovedThisFrame;
+    public bool hasMovedThisFrame;
     private bool _outOfBounds;
+    public bool hasMoleManUpgrade;
    
 
     public GravityPowerupState _gravityPowerupState = GravityPowerupState.NO_GRAVITYPOWERUP;
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        StartCoroutine(Game.Instance.SpawnPlayer(3.0f)); 
+        StartCoroutine(Game.Instance.SpawnPlayer(2.0f)); 
         
         AudioManager.Instance.Play("green", isLooping:true);
         
@@ -84,6 +86,15 @@ public class Player : MonoBehaviour
             UpdateDirection();
             UpdateMovement();
             CheckGravityPowerup();
+            CheckMoleManPowerup();
+        }
+    }
+
+    private void CheckMoleManPowerup()
+    {
+        if (hasMoleManUpgrade && Input.GetButtonDown("Jump"))
+        {
+            
         }
     }
 
@@ -175,7 +186,7 @@ public class Player : MonoBehaviour
 
     private void UpdateMovement()
     {
-        _hasMovedThisFrame = false;
+        hasMovedThisFrame = false;
 		
         if (_controller.collisions.above || _controller.collisions.below)
         {
@@ -187,7 +198,7 @@ public class Player : MonoBehaviour
 
         if (input != Vector2.zero)
         {
-            _hasMovedThisFrame = true;
+            hasMovedThisFrame = true;
         }
         
         Debug.DrawRay(transform.position, input, Color.red);
