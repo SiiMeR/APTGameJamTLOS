@@ -1,12 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 // some god object to setup the game
 public class Game : MonoBehaviour
 {
 
+    public List<GameObject> buttons;
+    
     public static Game Instance;
     private CheatState _cheatState;
 
@@ -35,12 +39,21 @@ public class Game : MonoBehaviour
         }
 
         player.enabled = true;
-        
+
+        yield return StartCoroutine(ShowButtons());
 
     }
 
     private void Awake()
     {
+        buttons.ForEach(button =>
+        {
+            var color = button.GetComponent<Image>().color;
+            color.a = 0f;
+            button.GetComponent<Image>().color = color;
+            
+        });
+        
         if (!Instance)
         {
             Instance = this;
@@ -53,6 +66,58 @@ public class Game : MonoBehaviour
         }
     }
 
+    private IEnumerator ShowButtons()
+    {
+        
+        yield return new WaitForSeconds(1.0f);
+        var timer = 0f;
+
+        while ((timer += Time.deltaTime) < 1.0f)
+        {
+            buttons.ForEach(button =>
+            {
+                var col = button.GetComponent<Image>().color;
+                col.a = Mathf.Lerp(0f, 1f, timer / 1.0f);
+                button.GetComponent<Image>().color = col;
+            });
+            
+            
+            yield return null;
+        }
+        
+        buttons.ForEach(button =>
+        {
+            var col = button.GetComponent<Image>().color;
+            col.a = 1f;
+            button.GetComponent<Image>().color = col;
+        });
+        
+        yield return new WaitForSeconds(4.0f);
+        
+        timer = 0f;
+
+        while ((timer += Time.deltaTime) < 1.0f)
+        {
+            buttons.ForEach(button =>
+            {
+                var col = button.GetComponent<Image>().color;
+                col.a = Mathf.Lerp(1f, 0f, timer / 1.0f);
+                button.GetComponent<Image>().color = col;
+            });
+            
+            
+            yield return null;
+        }
+        
+        buttons.ForEach(button =>
+        {
+            var col = button.GetComponent<Image>().color;
+            col.a = 0f;
+            button.GetComponent<Image>().color = col;
+        });
+        
+        yield return null;
+    }
     private void CheckCheat()
     {
         if (Input.anyKeyDown)
@@ -101,8 +166,6 @@ public class Game : MonoBehaviour
             Destroy(GameObject.Find("UI"));
             SceneManager.LoadScene("Menu");
         }
-
- 
         
         CheckCheat();
         
