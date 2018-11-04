@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
         
         if (doSpawnAnimation)
         {
-            StartCoroutine(Game.Instance.SpawnPlayer(2.0f));
+            StartCoroutine(Game.Instance.GetComponent<Game>().SpawnPlayer(2.0f));
         }
 
         _animator = GetComponent<Animator>();
@@ -516,6 +516,8 @@ public class Player : MonoBehaviour
 
     public void UpdateScoreUI()
     {
+        if (!GameObject.FindGameObjectWithTag("Score")) return;
+        
         GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>().text = $"Score: {Score}";
     }
     

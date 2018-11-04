@@ -18,6 +18,7 @@ public class Theend : MonoBehaviour
         
         var tex = GameObject.FindGameObjectWithTag("FinScor").GetComponent<TextMeshProUGUI>();
         tex.text = $"YOU {(Player.Score > 0 ? "WON" : "LOST")}! Your final score was: {Player.Score}";
+        
         StartCoroutine(ShowEscText());
     }
     
@@ -38,6 +39,7 @@ public class Theend : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape));
 
+        Player.Score = 0;
         SceneManager.LoadScene("Menu");
         yield return null;
     }

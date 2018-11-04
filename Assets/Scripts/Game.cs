@@ -11,7 +11,7 @@ public class Game : MonoBehaviour
 
     public List<GameObject> buttons;
     
-    public static Game Instance;
+    public static GameObject Instance;
     private CheatState _cheatState;
 
     public IEnumerator SpawnPlayer(float seconds)
@@ -61,7 +61,7 @@ public class Game : MonoBehaviour
         
         if (!Instance)
         {
-            Instance = this;
+            Instance = this.gameObject;
             DontDestroyOnLoad(this.gameObject);
 
         }
