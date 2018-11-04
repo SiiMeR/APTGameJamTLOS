@@ -377,10 +377,10 @@ public class Player : MonoBehaviour
     {
         var dist = (transform.position - Camera.main.transform.position).z;
 
-        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x - 1;
-        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x + 1;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y + 1;
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y - 1;
+        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x - 3;
+        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x + 3;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y + 3;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y - 3;
 
         if (!_outOfBounds &&
             (transform.position.y > topBorder ||
@@ -412,7 +412,7 @@ public class Player : MonoBehaviour
     
     private void LimitMaxSpeed()
     {
-        _velocity.y = Mathf.Clamp(_velocity.y, -35f, 35f);
+        _velocity.y = Mathf.Clamp(_velocity.y, -30f, 30f);
     }
 
     private void CheckGravityPowerup()
