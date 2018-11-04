@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -64,9 +65,13 @@ public class Player : MonoBehaviour
     public Tile redPortal;
 
     public Tile bluePortal;
+
+    private List<(TileBase, Vector3Int)> paintedTiles;
     // Use this for initialization
     void Start()
     {
+        paintedTiles = new List<(TileBase, Vector3Int)>();
+        
         if (doSpawnAnimation)
         {
             StartCoroutine(Game.Instance.SpawnPlayer(2.0f));
@@ -111,10 +116,16 @@ public class Player : MonoBehaviour
 
     private void DrawShroomPortalHelpers()
     {
+        foreach (var (tile, tilePos) in paintedTiles)
+        {
+            _tileMap.SetTile(tilePos, tile);
+        }
+        paintedTiles = new List<(TileBase, Vector3Int)>();
+        
         var rayOrigin = transform.position;
         var rayOrigin2 = rayOrigin;
 
-        var direction = Mathf.Sign(_velocity.x) * Vector3.right;
+        var direction = Mathf.Sign(_lastFacingDirection.x) * Vector3.right;
 
         var hit = Physics2D.Raycast(rayOrigin, direction, 4f, moleManLayers);
 
@@ -127,28 +138,34 @@ public class Player : MonoBehaviour
                 Debug.DrawRay(rayOrigin, direction, Color.yellow);
                 Debug.DrawRay(rayOrigin, -direction, Color.cyan);
                 
-                var facingRight = Mathf.Sign(_velocity.x) > float.Epsilon;
+                var facingRight = Mathf.Sign(_lastFacingDirection.x) > float.Epsilon;
                 
                 if (facingRight)
                 {
-                    rayOrigin = rayOrigin.AddX(hit.distance).AddX(1f).RoundX();
+                    rayOrigin = rayOrigin.AddX(hit.distance).AddX(.5f).RoundX();
                     rayOrigin2 = rayOrigin2.AddX(-hit2.distance).AddX(-0.5f).RoundX();
                 }
                 else
                 {
-                    rayOrigin = rayOrigin.AddX(-hit.distance).AddX(-1f).RoundX();
+                    rayOrigin = rayOrigin.AddX(-hit.distance).AddX(-.5f).RoundX();
                     rayOrigin2 = rayOrigin2.AddX(hit2.distance).AddX(0.5f).RoundX();
                 }
 
                 rayOrigin = rayOrigin.Round();    
                 rayOrigin2 = rayOrigin2.Round();
-                
-                Debug.Log($"{rayOrigin} + {rayOrigin2}");
 
-                if (_tileMap.GetTile(rayOrigin.Vector3Int()) != null && _tileMap.GetTile(rayOrigin2.Vector3Int()) != null)
+                var tile1 = _tileMap.GetTile(rayOrigin.Vector3Int());
+                var tile2 = _tileMap.GetTile(rayOrigin2.Vector3Int());
+                
+                if (tile1 != null && tile2 != null)
                 {
+                    paintedTiles.Add((tile1, rayOrigin.Vector3Int()));
+                    paintedTiles.Add((tile2, rayOrigin2.Vector3Int()));
+                    
+                    
                     _tileMap.SetTile(rayOrigin.Vector3Int(), redPortal);
                     _tileMap.SetTile(rayOrigin2.Vector3Int(), bluePortal);
+                    
                 }
                 
             }
@@ -172,7 +189,7 @@ public class Player : MonoBehaviour
 
             if (hit)
             {
-                var hit2 = Physics2D.Raycast(rayOrigin, -direction, 20f, moleManLayers);
+                var hit2 = Physics2D.Raycast(rayOrigin, -direction, 25f, moleManLayers);
 
                 if (hit2)
                 {
