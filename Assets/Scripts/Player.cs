@@ -225,11 +225,8 @@ public class Player : MonoBehaviour
 
                 centerPoint = centerPoint.Round();
                 
-                Debug.Log($"{centerPoint} + {centerPoint.Vector3Int()}");
-
                 _animator.SetTrigger("Dig");
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
-                // _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
             }
  
@@ -247,7 +244,13 @@ public class Player : MonoBehaviour
                 var centerPoint = rayOrigin;
 
                 centerPoint = centerPoint.AddY(-mainHit.distance).AddY(-0.5f).RoundY();
-   
+                var tile = _tileMap.GetTile(centerPoint.Vector3Int());
+
+                if (tile.name == "Glass")
+                {
+                    return; // cannot dig through glass
+                }
+
                 _animator.SetTrigger("Dig");
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
                 _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.left, null);

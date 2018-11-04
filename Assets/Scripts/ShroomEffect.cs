@@ -22,9 +22,9 @@ public class ShroomEffect : MonoBehaviour
         }
     }
 
-    public static bool _shroomEffectActive;
+    public bool _shroomEffectActive;
 
-    public static void ToggleShroomEffect()
+    public void ToggleShroomEffect()
     {
         _shroomEffectActive = !_shroomEffectActive;
     }
@@ -32,9 +32,15 @@ public class ShroomEffect : MonoBehaviour
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
         
-        if (!ShroomEffectMaterial || !_shroomEffectActive)
+        if (!ShroomEffectMaterial || !shroomEffectShader)
         {
             Debug.LogWarning("Something wrong with shroom post process");
+            Graphics.Blit(src,dest);
+            return;
+        }
+
+        if (!_shroomEffectActive)
+        {
             Graphics.Blit(src,dest);
             return;
         }
