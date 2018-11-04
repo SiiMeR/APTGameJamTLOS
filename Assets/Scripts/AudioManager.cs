@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
@@ -39,7 +40,7 @@ public class AudioManager : Singleton<AudioManager>
         foreach (var clip in audioClips) AudioMap.Add(clip.name, clip);
 
         sourcePool = new List<AudioSource>();
-        var parent = new GameObject("Audios");
+        var parent = GameObject.Find("Game");
 
         for (var i = 0; i < maxAudios; i++)
         {
@@ -136,9 +137,16 @@ public class AudioManager : Singleton<AudioManager>
     public void Play(string audioName, float vol = 1f, bool isLooping = false, Vector3? position = null)
     {
         if (string.IsNullOrEmpty(audioName)) return;
+
+
         var succ = AudioMap.TryGetValue(audioName, out var clip);
+        
+
         if (succ)
         {
+            
+            if (isLooping && IsAlreadyBeingPlayed(audioName)) return;
+            
             foreach (var source in sourcePool)
                 if (!source.isPlaying)
                 {
@@ -161,6 +169,15 @@ public class AudioManager : Singleton<AudioManager>
             Debug.LogWarning("Could not find audio: " + audioName);
         }
                     
+    }
+
+    public bool IsAlreadyBeingPlayed(string audioName)
+    {
+        
+        return sourcePool.Any(source =>
+        {
+            return source.clip && source.clip.name.Equals(audioName);
+        });
     }
 
     public void Play(AudioClip clip, float vol = 1f, bool isLooping = false, Vector3? position = null)

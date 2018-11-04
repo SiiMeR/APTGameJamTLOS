@@ -126,7 +126,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            AudioManager.Instance.StopAllMusic();
+            SceneManager.LoadScene("Menu");
         }
     }
 
