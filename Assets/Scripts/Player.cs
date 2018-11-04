@@ -186,11 +186,11 @@ public class Player : MonoBehaviour
 
         var direction = Mathf.Sign(_lastFacingDirection.x) * Vector3.right;
 
-        var hit = Physics2D.Raycast(rayOrigin, direction, 4f, moleManLayers);
+        var hit = Physics2D.Raycast(rayOrigin, direction, 5f, moleManLayers);
 
         if (hit)
         {
-            var hit2 = Physics2D.Raycast(rayOrigin, -direction, 20f, moleManLayers);
+            var hit2 = Physics2D.Raycast(rayOrigin, -direction, 50f, moleManLayers);
 
             if (hit2)
             {
@@ -248,7 +248,7 @@ public class Player : MonoBehaviour
 
             if (hit)
             {
-                var hit2 = Physics2D.Raycast(rayOrigin, -direction, 25f, moleManLayers);
+                var hit2 = Physics2D.Raycast(rayOrigin, -direction, 50f, moleManLayers);
 
                 if (hit2)
                 {
@@ -276,6 +276,8 @@ public class Player : MonoBehaviour
     {
         if (!hasMoleManUpgrade) return;
 
+        var isReverse = Physics2D.gravity.x > float.Epsilon;
+        
         var rayOrigin = transform.position;
         
         if (Mathf.Abs(_velocity.x) > float.Epsilon)
@@ -309,13 +311,22 @@ public class Player : MonoBehaviour
                 }
                 _animator.SetTrigger("Dig");
                 _tileMap.SetTile(centerPoint.Vector3Int(), null);
-                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
+
+                if (isReverse)
+                {
+                    _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.down, null);
+                }
+                else
+                {
+                    _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.up, null);
+                }
+
             }
  
 
         }
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") )
         {
             var (hit, hit2, hit3) = TryDigInDirectionVertical(Vector2.down, rayOrigin);
 
@@ -326,6 +337,32 @@ public class Player : MonoBehaviour
                 var centerPoint = rayOrigin;
 
                 centerPoint = centerPoint.AddY(-mainHit.distance).AddY(-0.5f).RoundY();
+                var tile = _tileMap.GetTile(centerPoint.Vector3Int());
+
+                if (tile && tile.name == "Glass")
+                {
+                    return; // cannot dig through glass
+                }
+
+                _animator.SetTrigger("Dig");
+                _tileMap.SetTile(centerPoint.Vector3Int(), null);
+                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.left, null);
+                _tileMap.SetTile(centerPoint.Vector3Int() + Vector3Int.right, null);
+            }
+        }
+
+        
+        if (isReverse) // upside down auto digging
+        {
+            var (hit, hit2, hit3) = TryDigInDirectionVertical(Vector2.up, rayOrigin);
+
+            var mainHit = hit ? hit : hit2 ? hit2 : hit3;
+
+            if (mainHit)
+            {
+                var centerPoint = rayOrigin;
+
+                centerPoint = centerPoint.AddY(mainHit.distance).AddY(0.5f).RoundY();
                 var tile = _tileMap.GetTile(centerPoint.Vector3Int());
 
                 if (tile && tile.name == "Glass")

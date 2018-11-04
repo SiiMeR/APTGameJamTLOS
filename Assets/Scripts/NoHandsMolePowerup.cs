@@ -32,6 +32,7 @@ public class NoHandsMolePowerup : MonoBehaviour
             var player = other.gameObject.GetComponent<Player>();
             player.GetComponent<Animator>().runtimeAnimatorController = player._moleManAnimator;
             player.hasMoleManUpgrade = true;
+//            player.hasShroomEffect = false;
             Destroy(player.GetComponent<BoxCollider2D>());
 
             var coll = player.gameObject.AddComponent<BoxCollider2D>();
