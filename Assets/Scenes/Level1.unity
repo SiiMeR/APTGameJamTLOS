@@ -359,24 +359,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 281572a23d959b6478ec573b946f8a80, type: 3}
---- !u!1 &926712101 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5372328981756845345, guid: e5813a101feda714884ba1918d95f2dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 5372328981514885871}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &926712102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926712101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24daf825605b0f84aa7f3c0d6b337a6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1376469353
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +578,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612619475317714964, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612619475317714964, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612619476261508917, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612619476261508917, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612619475275277696, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5813a101feda714884ba1918d95f2dc, type: 3}

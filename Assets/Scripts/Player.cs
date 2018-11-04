@@ -127,6 +127,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             AudioManager.Instance.StopAllMusic();
+            Destroy(GameObject.Find("UI"));
             SceneManager.LoadScene("Menu");
         }
     }
