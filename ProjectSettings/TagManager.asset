@@ -9,6 +9,7 @@ TagManager:
   - Say
   - FinScor
   - Esctoesc
+  - cutsc
   layers:
   - Default
   - TransparentFX

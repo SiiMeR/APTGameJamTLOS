@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartPressed()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Cutsc");
     }
 
     public void OnCreditsPressed()

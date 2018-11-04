@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 859c31c2abead6d4686ce80ee2873bb7, type: 3}
   - {fileID: 8300000, guid: e45592ab7565d274eac93074c9dd3418, type: 3}
   maxAudios: 16
-  musicVolume: 0
+  musicVolume: 1
   soundVolume: 1
 --- !u!114 &926712102
 MonoBehaviour:
@@ -69,6 +69,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24daf825605b0f84aa7f3c0d6b337a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &4010187020005390021
 PrefabInstance:
   m_ObjectHideFlags: 0
