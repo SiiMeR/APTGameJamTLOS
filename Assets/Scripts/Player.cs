@@ -12,6 +12,13 @@ public enum GravityPowerupState
     REVERSED_GRAVITY,
 }
 
+public enum CheatState
+{
+    NOTHING_PRESSED,
+    FIRST_PRESS,
+    ACTIVATED
+}
+
 
 [RequireComponent(typeof(BoxController2D))]
 public class Player : MonoBehaviour
@@ -67,11 +74,12 @@ public class Player : MonoBehaviour
     public Tile bluePortal;
 
     private List<(TileBase, Vector3Int)> paintedTiles;
+
     // Use this for initialization
     void Start()
     {
         
-        DontDestroyOnLoad(GameObject.FindObjectOfType<Game>().gameObject);
+        DontDestroyOnLoad(FindObjectOfType<Game>().gameObject);
         paintedTiles = new List<(TileBase, Vector3Int)>();
         
         if (doSpawnAnimation)
@@ -114,9 +122,24 @@ public class Player : MonoBehaviour
             CheckMoleManPowerup();
             CheckShroomPortalPowerup();
             CheckShortcuts();
+            
         }
     }
 
+
+
+    private IEnumerator ActivateCheat()
+    {
+        var timer = 0f;
+
+        while ((timer += Time.deltaTime) < 0.5f)
+        {
+            
+            AudioManager.Instance.Play("jump2");
+            yield return null;
+        }
+        
+    }
     private void CheckShortcuts()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -130,6 +153,8 @@ public class Player : MonoBehaviour
             Destroy(GameObject.Find("UI"));
             SceneManager.LoadScene("Menu");
         }
+
+ 
     }
 
     private void DrawShroomPortalHelpers()
@@ -325,10 +350,10 @@ public class Player : MonoBehaviour
     {
         var dist = (transform.position - Camera.main.transform.position).z;
 
-        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
-        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
+        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x - 1;
+        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x + 1;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y + 1;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y - 1;
 
         if (!_outOfBounds &&
             (transform.position.y > topBorder ||
