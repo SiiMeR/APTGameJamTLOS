@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Entrance
   - Score
+  - Say
   layers:
   - Default
   - TransparentFX

@@ -40,7 +40,12 @@ public class Game : MonoBehaviour
 
         player.enabled = true;
 
-        yield return StartCoroutine(ShowButtons());
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            
+            yield return StartCoroutine(ShowButtons());
+        }
+        
 
     }
 
@@ -68,14 +73,19 @@ public class Game : MonoBehaviour
 
     private IEnumerator ShowButtons()
     {
+
+        if (buttons == null) yield break;
         
         yield return new WaitForSeconds(1.0f);
         var timer = 0f;
 
         while ((timer += Time.deltaTime) < 1.0f)
         {
+            if (buttons == null) yield break;
+
             buttons.ForEach(button =>
             {
+                if (!button) return;
                 var col = button.GetComponent<Image>().color;
                 col.a = Mathf.Lerp(0f, 1f, timer / 1.0f);
                 button.GetComponent<Image>().color = col;
@@ -87,6 +97,9 @@ public class Game : MonoBehaviour
         
         buttons.ForEach(button =>
         {
+            
+            if (!button) return;
+            
             var col = button.GetComponent<Image>().color;
             col.a = 1f;
             button.GetComponent<Image>().color = col;
@@ -100,6 +113,10 @@ public class Game : MonoBehaviour
         {
             buttons.ForEach(button =>
             {
+                
+                
+                if (!button) return;
+                
                 var col = button.GetComponent<Image>().color;
                 col.a = Mathf.Lerp(1f, 0f, timer / 1.0f);
                 button.GetComponent<Image>().color = col;
@@ -111,6 +128,9 @@ public class Game : MonoBehaviour
         
         buttons.ForEach(button =>
         {
+            
+            
+            if (!button) return;
             var col = button.GetComponent<Image>().color;
             col.a = 0f;
             button.GetComponent<Image>().color = col;
@@ -156,12 +176,16 @@ public class Game : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StopAllCoroutines();
             Player.Score -= Player.SCORE_LOSS_PER_DEATH;
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            StopAllCoroutines();
             AudioManager.Instance.StopAllMusic();
             Destroy(GameObject.Find("UI"));
             SceneManager.LoadScene("Menu");

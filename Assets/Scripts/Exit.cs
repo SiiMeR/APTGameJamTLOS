@@ -24,6 +24,7 @@ public class Exit : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Player.Score += Player.SCORE_PERLEVEL;
+            Player.DeathsInLevel = 0;
             SceneManager.LoadScene(nextScene);
         }
     }

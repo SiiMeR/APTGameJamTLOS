@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public const int SCORE_LOSS_PER_DEATH = 100;
     
     public static int Score = 5000;
+    public static int DeathsInLevel = 0;
     
     public float minJumpHeight = 1f;
 
@@ -88,6 +89,47 @@ public class Player : MonoBehaviour
     void Start()
     {
 
+        var sa = GameObject.FindGameObjectWithTag("Say").GetComponent<TextMeshProUGUI>().color;
+        sa.a = 0f;
+        GameObject.FindGameObjectWithTag("Say").GetComponent<TextMeshProUGUI>().color = sa;
+        
+        
+        
+        switch (SceneManager.GetActiveScene().name)
+        {
+                case "Level1":
+                    switch (DeathsInLevel)    
+                    {
+                            case 1:
+                                StartCoroutine(SaySomething("Oops, I forgot to mention that you have to press SPACE to change gravity after getting the superpower"));
+                                break;
+                            
+                            case 2:
+                                StartCoroutine(SaySomething("I should add that you can press SPACE again to return the gravity to normal"));
+                                break;
+                            
+                            case 3:
+                                StartCoroutine(SaySomething("I thought you were smarter"));
+                                break;
+                    }
+                    break;
+                                
+                case "Level2":
+                    break;
+                                
+                case "Level3":
+                    break;
+                                
+                case "Level4":
+                    break;
+                                
+                case "Level5":
+                    break;
+                                
+                case "Level6":
+                    break;
+                
+        }
 
 //        DontDestroyOnLoad(FindObjectOfType<Game>());
         
@@ -430,7 +472,10 @@ public class Player : MonoBehaviour
         _outOfBounds = false;
         Time.timeScale = 1f;
 
+        
+        DeathsInLevel++;
         Score -= SCORE_LOSS_PER_DEATH;
+        StopAllCoroutines();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -467,6 +512,50 @@ public class Player : MonoBehaviour
         }
     }
 
+    public IEnumerator SaySomething(string toSay)
+    {
+        var say = GameObject.FindGameObjectWithTag("Say").GetComponent<TextMeshProUGUI>();
+        
+        yield return new WaitForSeconds(1.0f);
+        var timer = 0f;
+
+        say.text = $"???: {toSay}";
+        
+        while ((timer += Time.deltaTime) < 1.0f)
+        {
+            var col = say.color;
+            col.a = Mathf.Lerp(0f, 1f, timer / 1.0f);
+            say.GetComponent<TextMeshProUGUI>().color = col;
+            
+            yield return null;
+        }
+        
+        var endColor = say.color;
+        endColor.a = 1.0f;
+        say.GetComponent<TextMeshProUGUI>().color = endColor;
+
+        
+        yield return new WaitForSeconds(4.0f);
+        
+        timer = 0f;
+
+        while ((timer += Time.deltaTime) < 1.0f)
+        {
+            var col = say.color;
+            col.a = Mathf.Lerp(1f, 0f, timer / 1.0f);
+            say.GetComponent<TextMeshProUGUI>().color = col;
+            
+            yield return null;
+        }
+        
+        endColor = say.color;
+        endColor.a = 0.0f;
+        say.GetComponent<TextMeshProUGUI>().color = endColor;
+        
+        yield return null;
+        
+    }
+    
     private IEnumerator SmoothChangeGravity(Vector2 start, Vector2 end, float time)
     {
         var timer = 0f;
