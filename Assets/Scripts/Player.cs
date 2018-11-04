@@ -139,8 +139,16 @@ public class Player : MonoBehaviour
             CheckGravityPowerup();
             CheckMoleManPowerup();
             CheckShroomPortalPowerup();
-            CheckShortcuts();
-            
+            CheckDeath();
+
+        }
+    }
+
+    private void CheckDeath()
+    {
+        if (Score < 0)
+        {
+            SceneManager.LoadScene("Ending");
         }
     }
 
@@ -163,23 +171,7 @@ public class Player : MonoBehaviour
         }
         
     }
-    private void CheckShortcuts()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Score -= SCORE_LOSS_PER_DEATH;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            AudioManager.Instance.StopAllMusic();
-            Destroy(GameObject.Find("UI"));
-            SceneManager.LoadScene("Menu");
-        }
-
- 
-    }
 
     private void DrawShroomPortalHelpers()
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -90,6 +89,20 @@ public class Game : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Player.Score -= Player.SCORE_LOSS_PER_DEATH;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            AudioManager.Instance.StopAllMusic();
+            Destroy(GameObject.Find("UI"));
+            SceneManager.LoadScene("Menu");
+        }
+
+ 
         
         CheckCheat();
         
