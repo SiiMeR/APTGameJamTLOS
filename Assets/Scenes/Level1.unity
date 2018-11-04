@@ -300,12 +300,12 @@ PrefabInstance:
     - target: {fileID: 1761764921231785170, guid: 281572a23d959b6478ec573b946f8a80,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.47
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 1761764921231785170, guid: 281572a23d959b6478ec573b946f8a80,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.39
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 1761764921231785170, guid: 281572a23d959b6478ec573b946f8a80,
         type: 3}
@@ -8562,15 +8562,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8288466600267219152, guid: 69611dbe19e0889468f564424f5d551f,
+        type: 3}
+      propertyPath: m_StretchFill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8288466600267219166, guid: 69611dbe19e0889468f564424f5d551f,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8288466600267219166, guid: 69611dbe19e0889468f564424f5d551f,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8288466600267219166, guid: 69611dbe19e0889468f564424f5d551f,
         type: 3}
       propertyPath: orthographic size
-      value: 11.25
+      value: 11.076923
       objectReference: {fileID: 0}
     - target: {fileID: 8288466600267219166, guid: 69611dbe19e0889468f564424f5d551f,
         type: 3}
       propertyPath: m_ForceIntoRT
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69611dbe19e0889468f564424f5d551f, type: 3}

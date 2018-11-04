@@ -53,14 +53,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.125
     width: 1
-    height: 1
+    height: 0.75
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.8
+  orthographic size: 11.076923
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 50
-  m_RefResolutionX: 1920
-  m_RefResolutionY: 1080
+  m_AssetsPPU: 26
+  m_RefResolutionX: 1024
+  m_RefResolutionY: 576
   m_UpscaleRT: 0
   m_PixelSnapping: 1
   m_CropFrameX: 1
@@ -117,3 +117,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shroomEffectShader: {fileID: 4800000, guid: aba909fe8c271b84892e6ef61a80f6c1, type: 3}
+  _shroomEffectActive: 0
