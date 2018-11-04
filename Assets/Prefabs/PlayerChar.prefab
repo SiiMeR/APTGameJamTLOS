@@ -424,7 +424,7 @@ MonoBehaviour:
   minJumpHeight: 1
   timeToJumpApex: 0.3
   moveSpeed: 11
-  accelerationTimeAirborne: 0.2
+  accelerationTimeAirborne: 0.15
   accelerationTimeGrounded: 0.1
   _velocity: {x: 0, y: 0, z: 0}
   _controller: {fileID: 0}

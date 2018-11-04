@@ -115,9 +115,37 @@ public class Player : MonoBehaviour
                     break;
                                 
                 case "Level2":
+                    switch (DeathsInLevel)    
+                    {
+                        case 1:
+                            StartCoroutine(SaySomething("Press SPACE to go deeper"));
+                            break;
+                            
+                        case 2:
+                            StartCoroutine(SaySomething("Be gentle"));
+                            break;
+                            
+                        case 3:
+                            StartCoroutine(SaySomething("-_- I told you be gentle"));
+                            break;
+                    }
                     break;
                                 
                 case "Level3":
+                    switch (DeathsInLevel)    
+                    {
+                        case 1:
+                            StartCoroutine(SaySomething("Dude, look at those beautiful walls"));
+                            break;
+                            
+                        case 2:
+                            StartCoroutine(SaySomething("Red takes you to blue"));
+                            break;
+                            
+                        case 3:
+                            StartCoroutine(SaySomething("Take it easy"));
+                            break;
+                    }
                     break;
                                 
                 case "Level4":
@@ -127,6 +155,13 @@ public class Player : MonoBehaviour
                     break;
                                 
                 case "Level6":
+                    switch (DeathsInLevel)    
+                    {
+                        case 20:
+                            StartCoroutine(SaySomething("Git gud"));
+                            break;
+    
+                    }
                     break;
                 
         }
