@@ -9,7 +9,7 @@
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance;
+    public static T _instance;
 
     private static readonly object _lock = new object();
 
@@ -30,7 +30,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 {
                     _instance = (T) FindObjectOfType(typeof(T));
 
-               //     DontDestroyOnLoad(_instance);
+//                    DontDestroyOnLoad(_instance);
                     if (FindObjectsOfType(typeof(T)).Length > 1)
                     {
                         Debug.LogError("[Singleton] Something went really wrong " +

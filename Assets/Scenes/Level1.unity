@@ -659,6 +659,11 @@ PrefabInstance:
       propertyPath: m_margin.w
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3612619476261508907, guid: e5813a101feda714884ba1918d95f2dc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Score
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5813a101feda714884ba1918d95f2dc, type: 3}
 --- !u!1001 &5432894292941710595

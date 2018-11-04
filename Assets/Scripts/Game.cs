@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 
 // some god object to setup the game
-public class Game : Singleton<Game>
+public class Game : MonoBehaviour
 {
 
+    public static Game Instance;
     private CheatState _cheatState;
 
     public IEnumerator SpawnPlayer(float seconds)
@@ -38,7 +39,21 @@ public class Game : Singleton<Game>
         
 
     }
-    
+
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void CheckCheat()
     {
         if (Input.anyKeyDown)

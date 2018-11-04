@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -23,6 +24,14 @@ public enum CheatState
 [RequireComponent(typeof(BoxController2D))]
 public class Player : MonoBehaviour
 {
+    
+    
+    public const int SCORE_PERLEVEL = 2000;
+    public const int SCORE_LOSS_PER_SECOND = 100;
+    public const int SCORE_LOSS_PER_DEATH = 100;
+    
+    public static int Score = 5000;
+    
     public float minJumpHeight = 1f;
 
     public float MaxJumpHeight
@@ -78,8 +87,17 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+
+//        DontDestroyOnLoad(FindObjectOfType<Game>());
         
-        DontDestroyOnLoad(FindObjectOfType<Game>().gameObject);
+        /*if (FindObjectsOfType<Game>().Length > 1)
+        {
+            Destroy(FindObjectOfType<Game>());
+        }*/
+        
+        UpdateScoreUI();
+        
         paintedTiles = new List<(TileBase, Vector3Int)>();
         
         if (doSpawnAnimation)
@@ -127,6 +145,11 @@ public class Player : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        Score -= (int) (SCORE_LOSS_PER_SECOND * Time.deltaTime);
+    }
+
 
     private IEnumerator ActivateCheat()
     {
@@ -145,6 +168,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Score -= SCORE_LOSS_PER_DEATH;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -328,6 +352,9 @@ public class Player : MonoBehaviour
 
     private (RaycastHit2D, RaycastHit2D, RaycastHit2D) TryDigInDirectionHorizontal(Vector2 direction, Vector3 origin)
     {
+        
+       
+        
         var distance = 1.1f;
         var hit = Physics2D.Raycast(origin + Vector3.up, direction, distance, moleManLayers);
         var hit2 = Physics2D.Raycast(origin, direction,distance, moleManLayers);
@@ -374,9 +401,15 @@ public class Player : MonoBehaviour
         _outOfBounds = false;
         Time.timeScale = 1f;
 
+        Score -= SCORE_LOSS_PER_DEATH;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void UpdateScoreUI()
+    {
+        GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>().text = $"Score: {Score}";
+    }
+    
     private void LimitMaxSpeed()
     {
         _velocity.y = Mathf.Clamp(_velocity.y, -35f, 35f);
@@ -431,6 +464,8 @@ public class Player : MonoBehaviour
         GetComponent<SpriteRenderer>().flipX = flipX;
         GetComponent<SpriteRenderer>().flipY = flipY;
     }
+    
+    
 
 
     private void UpdateMovement()
@@ -483,6 +518,8 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
+        UpdateScoreUI();
+        
         if (hasMovedThisFrame)
         {
             _animator.SetTrigger("Walk");
