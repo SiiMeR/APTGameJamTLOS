@@ -113,8 +113,6 @@ public class Game : MonoBehaviour
         {
             buttons.ForEach(button =>
             {
-                
-                
                 if (!button) return;
                 
                 var col = button.GetComponent<Image>().color;
