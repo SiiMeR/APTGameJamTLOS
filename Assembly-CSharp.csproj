@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\GravityPowerup.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\NoHandsMolePowerup.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RayCastController.cs" />

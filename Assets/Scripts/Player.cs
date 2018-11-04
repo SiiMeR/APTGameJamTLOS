@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
+        DontDestroyOnLoad(GameObject.FindObjectOfType<Game>().gameObject);
         paintedTiles = new List<(TileBase, Vector3Int)>();
         
         if (doSpawnAnimation)
@@ -111,6 +113,20 @@ public class Player : MonoBehaviour
             CheckGravityPowerup();
             CheckMoleManPowerup();
             CheckShroomPortalPowerup();
+            CheckShortcuts();
+        }
+    }
+
+    private void CheckShortcuts()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 

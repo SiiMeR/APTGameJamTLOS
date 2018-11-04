@@ -6,7 +6,7 @@ using UnityEngine;
 // some god object to setup the game
 public class Game : Singleton<Game>
 {
-    
+
     public IEnumerator SpawnPlayer(float seconds)
     {
         var entranceLocation = GameObject.FindGameObjectWithTag("Entrance");
